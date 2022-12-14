@@ -10,7 +10,7 @@ interface Result {
   statusCode?: number;
 }
 
-const BASE_URL = "http://localhost:8080/api";
+const BASE_URL = "https://employee-management-system-deploy.vercel.app/api";
 
 export { Status, BASE_URL };
 export type { Result };
