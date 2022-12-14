@@ -13,6 +13,7 @@ interface InputFieldProps {
   error?: string;
   touched?: boolean;
   label: string;
+  type?: string;
 }
 
 function InputField({
@@ -23,13 +24,17 @@ function InputField({
   error,
   touched,
   label,
+  type,
 }: InputFieldProps) {
   const isInValid = (error && touched) as boolean;
+
+  type = type || "text";
 
   return (
     <FormControl isInvalid={isInValid}>
       <FormLabel>{label}</FormLabel>
       <Input
+        type={type}
         name={name}
         value={value}
         onBlur={onBlur}

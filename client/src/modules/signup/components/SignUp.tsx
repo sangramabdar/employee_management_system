@@ -143,6 +143,7 @@ function SignUp() {
           />
 
           <InputField
+            type="password"
             label="Password"
             name="password"
             onChange={handleChange}
@@ -153,6 +154,7 @@ function SignUp() {
           />
 
           <InputField
+            type="password"
             label="Confirm Password"
             name="confirmPassword"
             onChange={handleChange}

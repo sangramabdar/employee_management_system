@@ -9,7 +9,10 @@ import {
 } from "./employee.repository";
 
 async function getEmployeesService(req: Request) {
-  let employees = await getAllEmployees();
+  let userId = (req as any).user._id;
+
+  let employees = await getAllEmployees(userId);
+
   if (!employees) throw new NotFound("employees");
   return employees;
 }

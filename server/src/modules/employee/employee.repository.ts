@@ -3,10 +3,15 @@ import Database from "../../config/db";
 import { ObjectId } from "mongodb";
 import { EmployeeDto } from "./employee.dto";
 
-async function getAllEmployees() {
+async function getAllEmployees(userId: string) {
   let db = await Database.getDb();
 
-  let employees = await db.collection("employees").find({}).toArray();
+  let employees = await db
+    .collection("employees")
+    .find({
+      createdById: userId,
+    })
+    .toArray();
 
   if (!employees) return null;
 

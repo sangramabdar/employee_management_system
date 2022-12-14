@@ -10,7 +10,6 @@ function DashBoard() {
   const navigate = useNavigate();
 
   const [employees, setEmployees] = useState<any[]>([]);
-  console.log(employees);
   const [error, setError] = useState("");
 
   useEffect(() => {

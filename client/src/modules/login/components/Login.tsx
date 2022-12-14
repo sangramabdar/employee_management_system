@@ -129,6 +129,7 @@ function Login() {
 
           <InputField
             label="Password"
+            type="password"
             name="password"
             onChange={handleChange}
             value={values.password}
