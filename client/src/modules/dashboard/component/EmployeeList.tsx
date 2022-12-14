@@ -69,7 +69,7 @@ function EmployeeList({
           </Tr>
         </Thead>
         <Tbody>
-          {employees?.slice(0, employees.length).map(employee => {
+          {employees?.slice(0, employees.length).map((employee: any) => {
             return (
               <EmployeeRow
                 handleDeleteEmployee={handleDeleteEmployee}
