@@ -9,7 +9,11 @@ interface LoginInfo {
 const LOGIN_URL = BASE_URL + "/auth/login";
 
 async function loginUser(loginInfo: LoginInfo | null) {
-  const result = await postRequest(LOGIN_URL, loginInfo);
+  const result = await postRequest(LOGIN_URL, loginInfo, {
+    "Access-Control-Allow-Origin": "*",
+    "Content-Type": "application/json",
+    "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS",
+  });
   return result;
 }
 

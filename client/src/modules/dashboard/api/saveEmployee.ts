@@ -19,6 +19,10 @@ async function saveEmployee(employee: Employee) {
 
   const result = await postRequest(EMPLOYEE_URL, employee, {
     Authorization: "Bearer " + accessToken,
+    ...{
+      "Access-Control-Allow-Origin": "*",
+      "Content-Type": "application/json",
+    },
   });
 
   console.log(result);
@@ -30,6 +34,10 @@ async function getEmployees() {
 
   const result = await getRequest(EMPLOYEE_URL, {
     Authorization: "Bearer " + accessToken,
+    ...{
+      "Access-Control-Allow-Origin": "*",
+      "Content-Type": "application/json",
+    },
   });
 
   console.log(result);
@@ -41,6 +49,10 @@ async function deleteEmployee(id: string) {
 
   const result = await deleteRequest(EMPLOYEE_URL + "/" + id, {
     Authorization: "Bearer " + accessToken,
+    ...{
+      "Access-Control-Allow-Origin": "*",
+      "Content-Type": "application/json",
+    },
   });
 
   console.log(result);
@@ -51,6 +63,10 @@ async function updateEmployee(id: string, employee: any) {
 
   const result = await putRequest(EMPLOYEE_URL + "/" + id, employee, {
     Authorization: "Bearer " + accessToken,
+    ...{
+      "Access-Control-Allow-Origin": "*",
+      "Content-Type": "application/json",
+    },
   });
 
   console.log(result);

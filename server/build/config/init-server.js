@@ -13,7 +13,9 @@ const PORT = 443;
 const app = (0, express_1.default)();
 exports.app = app;
 async function initServer() {
-    app.use((0, cors_1.default)());
+    app.use((0, cors_1.default)({
+        origin: "*",
+    }));
     app.use(express_1.default.static("public"));
     app.use(express_1.default.json({
         type: ["json"],

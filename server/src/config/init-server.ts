@@ -10,7 +10,11 @@ const PORT = 443;
 const app = Express();
 
 async function initServer() {
-  app.use(cors());
+  app.use(
+    cors({
+      origin: "*",
+    })
+  );
   app.use(Express.static("public"));
   app.use(
     Express.json({

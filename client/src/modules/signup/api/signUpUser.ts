@@ -11,7 +11,10 @@ interface SignUpInfo {
 const SIGNUP_URL = BASE_URL + "/auth/signup";
 
 async function signUpUser(signUpInfo: SignUpInfo | null) {
-  const result = await postRequest(SIGNUP_URL, signUpInfo);
+  const result = await postRequest(SIGNUP_URL, signUpInfo, {
+    "Access-Control-Allow-Origin": "*",
+    "Content-Type": "application/json",
+  });
   return result;
 }
 
