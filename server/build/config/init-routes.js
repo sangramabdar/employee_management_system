@@ -14,7 +14,9 @@ async function initRoutes() {
     init_server_1.app.use("/", root_router_1.default);
     init_server_1.app.use("/api/auth", auth_router_1.default);
     init_server_1.app.use("/api/employees", employee_router_1.default);
-    init_server_1.app.use("*", error_middleware_1.invalidPathHandler);
+    init_server_1.app.use("*", (req, res) => {
+        res.redirect("/");
+    });
     //global error handling middleware
     init_server_1.app.use(logger_1.errorLogger);
     init_server_1.app.use(error_middleware_1.errorHandlingMiddleWare);

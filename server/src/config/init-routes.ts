@@ -13,7 +13,9 @@ async function initRoutes() {
   app.use("/", RootRouter);
   app.use("/api/auth", authRouter);
   app.use("/api/employees", employeeRouter);
-  app.use("*", invalidPathHandler);
+  app.use("*", (req, res) => {
+    res.redirect("/");
+  });
 
   //global error handling middleware
   app.use(errorLogger);
