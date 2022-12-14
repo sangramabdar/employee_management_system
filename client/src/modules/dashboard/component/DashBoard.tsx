@@ -4,18 +4,13 @@ import { useNavigate } from "react-router-dom";
 import AddButton from "./AddButton";
 import { getEmployees } from "../api/saveEmployee";
 import { Status } from "../../../api/constants";
-import { Box, Button } from "@chakra-ui/react";
+import { Box, Button, useToast } from "@chakra-ui/react";
 
 function DashBoard() {
   const navigate = useNavigate();
-
   const [employees, setEmployees] = useState<any[]>([]);
   const [error, setError] = useState("");
-
-  useEffect(() => {
-    if (localStorage.getItem("token")) return;
-    navigate("/login");
-  }, []);
+  const toast = useToast();
 
   useEffect(() => {
     setTimeout(() => {
@@ -23,9 +18,32 @@ function DashBoard() {
     }, 2000);
   }, []);
 
+  useEffect(() => {
+    if (localStorage.getItem("token")) return;
+    navigate("/login");
+  });
+
+  const showErrorToast = (message: string) => {
+    toast({
+      position: "top",
+      status: "error",
+      description: message,
+      duration: 1000,
+    });
+  };
+
   const getEmployeesService = async () => {
     const result = await getEmployees();
-    console.log(result);
+
+    if (result.statusCode === 403) {
+      showErrorToast("token is expired , plz log in again");
+      localStorage.removeItem("token");
+      navigate("/", {
+        replace: true,
+      });
+      return;
+    }
+
     if (result.status === Status.ERROR) {
       return;
     }

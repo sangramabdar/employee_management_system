@@ -1,14 +1,10 @@
 import { Db, MongoClient } from "mongodb";
 
 class MongoDatabase {
-  private static readonly URL =
-    process.env.DB_URL || "mongodb://localhost:27017";
-  private static readonly DB_NAME =
-    process.env.DB_NAME || "employee-management-system";
+  private static readonly URL = process.env.DB_URL;
+  private static readonly DB_NAME = process.env.DB_NAME;
   private static db: Db | null = null;
-  private static mongoClient: MongoClient = new MongoClient(MongoDatabase.URL, {
-    serverSelectionTimeoutMS: 2000,
-  });
+  private static mongoClient: MongoClient = new MongoClient(MongoDatabase.URL);
 
   static async connectToDatabase() {
     try {
@@ -16,6 +12,7 @@ class MongoDatabase {
       MongoDatabase.db = MongoDatabase.mongoClient.db(MongoDatabase.DB_NAME);
       console.log("database is connected");
     } catch (error) {
+      console.log(error.message);
       MongoDatabase.db = null;
       console.log("database is not connected");
     }

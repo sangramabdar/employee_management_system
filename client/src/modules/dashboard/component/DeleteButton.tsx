@@ -1,10 +1,12 @@
 import { Button, useToast } from "@chakra-ui/react";
+import { useNavigate } from "react-router-dom";
 import { Status } from "../../../api/constants";
 import { deleteEmployee } from "../api/saveEmployee";
 
 function DeleteButton(props: any) {
   const { _id, handleDeleteEmployee } = props;
   const toast = useToast();
+  const navigate = useNavigate();
 
   const showSuccessToast = () => {
     toast({
@@ -15,8 +17,27 @@ function DeleteButton(props: any) {
     });
   };
 
+  const showErrorToast = (message: string) => {
+    toast({
+      status: "error",
+      description: message,
+      duration: 1000,
+      position: "top",
+    });
+  };
+
   const deleteEmployeeService = async () => {
     const result = await deleteEmployee(_id);
+
+    if (result.statusCode === 403) {
+      showErrorToast("token is expired , plz log in again");
+      localStorage.removeItem("token");
+      navigate("/", {
+        replace: true,
+      });
+      return;
+    }
+
     if (result.status === Status.ERROR) {
       return;
     }

@@ -16,10 +16,12 @@ import { Status } from "../../../api/constants";
 import InputField from "../../../components/InputField";
 import { updateEmployee } from "../api/saveEmployee";
 import { employeeSchema } from "../constants";
+import { useNavigate } from "react-router-dom";
 
 function UpdateButton(props: any) {
   const { _id, name, age, salary } = props;
 
+  const navigate = useNavigate();
   const toast = useToast();
   const [isDisabled, setIsDisabled] = useState(false);
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -63,10 +65,10 @@ function UpdateButton(props: any) {
     });
   };
 
-  const showErrorToast = () => {
+  const showErrorToast = (message: string) => {
     toast({
       status: "error",
-      description: "something went wrong",
+      description: message,
       duration: 1000,
       position: "top",
     });
@@ -95,8 +97,17 @@ function UpdateButton(props: any) {
     setIsDisabled(false);
     toast.closeAll();
 
+    if (result.statusCode === 403) {
+      showErrorToast("token is expired , plz log in again");
+      localStorage.removeItem("token");
+      navigate("/", {
+        replace: true,
+      });
+      return;
+    }
+
     if (result.status === Status.ERROR) {
-      showErrorToast();
+      showErrorToast(result.error!!);
       return;
     }
 

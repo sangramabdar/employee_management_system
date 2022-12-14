@@ -17,6 +17,7 @@ import SubmitButton from "../../../components/SubmitButton";
 import { saveEmployee } from "../api/saveEmployee";
 import * as yup from "yup";
 import { useToast, Box } from "@chakra-ui/react";
+import { useNavigate } from "react-router-dom";
 
 const employeeSchema = yup.object().shape({
   name: yup.string().required("Required"),
@@ -36,6 +37,7 @@ const initialEmloyeeValues = {
 };
 
 function AddButton({ handleAddEmployee }: any) {
+  const navigate = useNavigate();
   const toast = useToast();
   const [isDisabled, setIsDisabled] = useState(false);
 
@@ -56,10 +58,10 @@ function AddButton({ handleAddEmployee }: any) {
     });
   };
 
-  const showErrorToast = () => {
+  const showErrorToast = (message: string) => {
     toast({
       status: "error",
-      description: "Something went wrong",
+      description: message,
       duration: 1000,
       position: "top",
     });
@@ -108,8 +110,17 @@ function AddButton({ handleAddEmployee }: any) {
     setIsDisabled(false);
     toast.closeAll();
 
+    if (result.statusCode === 403) {
+      showErrorToast("token is expired , plz log in again");
+      localStorage.removeItem("token");
+      navigate("/", {
+        replace: true,
+      });
+      return;
+    }
+
     if (result.status === Status.ERROR) {
-      showErrorToast();
+      showErrorToast(result.error!!);
       return;
     }
 

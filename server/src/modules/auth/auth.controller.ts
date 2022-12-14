@@ -1,5 +1,4 @@
 import { Response, Request } from "express";
-import { BadRequest } from "../../common/helper/exceptions";
 
 import ResponseBodyBuilder from "../../common/helper/response-body-builder";
 import { generateAccessToken } from "../../common/helper/validation";
@@ -11,7 +10,7 @@ class AuthController {
     try {
       const user = await loginService(req);
 
-      const accessToken = await generateAccessToken(user);
+      const accessToken = await generateAccessToken(user, "24h");
 
       const responseBody = new ResponseBodyBuilder()
         .setStatusCode(200)
