@@ -1,0 +1,147 @@
+import { Center, Stack, ToastId, useToast } from "@chakra-ui/react";
+import { useFormik } from "formik";
+import { useNavigate } from "react-router-dom";
+import * as yup from "yup";
+import InputField from "../../../components/InputField";
+import SubmitButton from "../../../components/SubmitButton";
+import { useEffect, useRef, useState } from "react";
+import { LoginInfo, loginUser } from "../api/loginUser";
+import { Status } from "../../../api/constants";
+
+let loginFormData = yup.object().shape({
+  email: yup.string().required("Required").email(),
+  password: yup.string().required("Required").min(8).max(20),
+});
+
+let iniitalLoginFormData = {
+  email: "",
+  password: "",
+};
+
+function Login() {
+  const toast = useToast();
+
+  const [loginInfo, setLoginInfo] = useState<LoginInfo | null>(null);
+
+  const loginToast = useRef<ToastId | null>(null);
+  const errorToast = useRef<ToastId | null>(null);
+  const successToast = useRef<ToastId | null>(null);
+
+  const navigation = useNavigate();
+
+  useEffect(() => {
+    if (!loginInfo) return;
+
+    setTimeout(() => {
+      loginService(loginInfo);
+    }, 500);
+  }, [loginInfo]);
+
+  useEffect(() => {
+    if (localStorage.getItem("token")) {
+      navigation("/dashboard");
+      return;
+    }
+  }, []);
+
+  const loginService = async (loginInfo: LoginInfo | null) => {
+    const result = await loginUser(loginInfo);
+
+    if (result.status == Status.ERROR) {
+      removeLoginToast();
+      showErrorToast(result.error!!);
+      setLoginInfo(null);
+      return;
+    }
+
+    removeLoginToast();
+    showSuccessToast();
+    localStorage.setItem("token", result.data.accessToken);
+    navigation("/dashboard");
+  };
+
+  const removeLoginToast = () => {
+    if (!loginToast.current) return;
+    toast.close(loginToast.current as ToastId);
+    loginToast.current = null;
+  };
+
+  const removeErrorToast = () => {
+    if (!errorToast.current) return;
+    toast.close(errorToast.current as ToastId);
+    errorToast.current = null;
+  };
+
+  const showSuccessToast = () => {
+    successToast.current = toast({
+      status: "success",
+      description: "logged in",
+      position: "bottom",
+      duration: 1000,
+    });
+  };
+
+  const showLoginToast = () => {
+    loginToast.current = toast({
+      status: "loading",
+      description: "logging in",
+      position: "bottom",
+      duration: 10000000,
+    });
+  };
+
+  const showErrorToast = (message: string) => {
+    errorToast.current = toast({
+      status: "error",
+      description: message,
+      position: "bottom",
+    });
+  };
+
+  const onSubmit = (loginInfo: LoginInfo) => {
+    if (loginToast.current) return;
+
+    removeErrorToast();
+    showLoginToast();
+    setLoginInfo(loginInfo);
+  };
+
+  const { values, handleChange, errors, touched, handleBlur, handleSubmit } =
+    useFormik({
+      initialValues: iniitalLoginFormData,
+      onSubmit,
+      validationSchema: loginFormData,
+    });
+
+  return (
+    <Center bg="blue.400" h="100vh" color="white">
+      <Stack justifyContent="center" alignItems="center">
+        <form onSubmit={handleSubmit}>
+          <InputField
+            label="Email"
+            name="email"
+            onChange={handleChange}
+            value={values.email}
+            onBlur={handleBlur}
+            error={errors.email}
+            touched={touched.email}
+          />
+
+          <InputField
+            label="Password"
+            name="password"
+            onChange={handleChange}
+            value={values.password}
+            onBlur={handleBlur}
+            error={errors.password}
+            touched={touched.password}
+          />
+
+          <SubmitButton title="Login" />
+        </form>
+      </Stack>
+    </Center>
+  );
+}
+
+export default Login;
