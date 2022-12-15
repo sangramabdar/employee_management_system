@@ -5,7 +5,7 @@ import initRoutes from "./init-routes";
 import MongoDatabase from "./db";
 import { requestLogger } from "../common/helper/logger";
 
-const PORT = 443;
+const PORT = 5050;
 
 const app = Express();
 

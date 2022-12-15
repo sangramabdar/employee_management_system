@@ -9,7 +9,7 @@ const cors_1 = __importDefault(require("cors"));
 const init_routes_1 = __importDefault(require("./init-routes"));
 const db_1 = __importDefault(require("./db"));
 const logger_1 = require("../common/helper/logger");
-const PORT = 443;
+const PORT = 5050;
 const app = (0, express_1.default)();
 exports.app = app;
 async function initServer() {
