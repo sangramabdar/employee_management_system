@@ -1,8 +1,9 @@
 import { Request, Response } from "express";
+import path from "path";
 
 class RootController {
   static async get(req: Request, res: Response) {
-    return res.send("app");
+    res.send(path.join(__dirname, "../../../files/index.html"));
   }
 }
 
