@@ -85,9 +85,7 @@ function UpdateButton(props: any) {
 
   useEffect(() => {
     if (!employeeInfo) return;
-    setTimeout(() => {
-      updateEmployeeService(employeeInfo);
-    }, 1000);
+    updateEmployeeService(employeeInfo);
   }, [employeeInfo]);
 
   const updateEmployeeService = async (employeeInfo: any) => {
@@ -115,16 +113,20 @@ function UpdateButton(props: any) {
     resetForm();
     onClose();
 
-    let { handleDeleteEmployee, handleUpdateEmployee, ...requiredProps } =
-      props;
+    let { handleDeleteEmployee, handleUpdateEmployee, ...otherProps } = props;
 
-    handleUpdateEmployee();
+    handleUpdateEmployee({ ...otherProps, ...employeeInfo });
+  };
+
+  const handleOnClose = () => {
+    resetForm();
+    onClose();
   };
 
   return (
     <>
       <Button onClick={onOpen}>Update</Button>
-      <Modal isOpen={isOpen} onClose={onClose}>
+      <Modal isOpen={isOpen} onClose={handleOnClose}>
         <ModalOverlay />
         <ModalContent>
           <ModalHeader>Create your account</ModalHeader>

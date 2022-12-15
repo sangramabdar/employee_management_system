@@ -13,7 +13,6 @@ import { useFormik } from "formik";
 import React, { useState, useEffect } from "react";
 import { Status } from "../../../api/constants";
 import InputField from "../../../components/InputField";
-import SubmitButton from "../../../components/SubmitButton";
 import { saveEmployee } from "../api/saveEmployee";
 import * as yup from "yup";
 import { useToast, Box } from "@chakra-ui/react";
@@ -98,9 +97,7 @@ function AddButton({ handleAddEmployee }: any) {
 
   useEffect(() => {
     if (!employeeInfo) return;
-    setTimeout(() => {
-      saveEmployeeService(employeeInfo);
-    }, 1000);
+    saveEmployeeService(employeeInfo);
   }, [employeeInfo]);
 
   const saveEmployeeService = async (employeeInfo: any) => {

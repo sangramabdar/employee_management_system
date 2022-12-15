@@ -13,9 +13,7 @@ function DashBoard() {
   const toast = useToast();
 
   useEffect(() => {
-    setTimeout(() => {
-      getEmployeesService();
-    }, 2000);
+    getEmployeesService();
   }, []);
 
   useEffect(() => {
@@ -69,13 +67,14 @@ function DashBoard() {
     setEmployees(updatedEmployees);
   };
 
-  const handleUpdateEmployee = () => {
+  const handleUpdateEmployee = (updatedEmployee: any) => {
     // const updatedEmployees = employees.map(employee => {
     //   if (employee._id === updatedEmployee._id) {
     //     employee = { ...updatedEmployee };
     //   }
     //   return employee;
     // });
+
     // setEmployees(updatedEmployees);
 
     getEmployeesService();

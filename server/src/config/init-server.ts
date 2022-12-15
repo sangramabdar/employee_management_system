@@ -16,7 +16,7 @@ async function initServer() {
       type: ["json"],
     })
   );
-  // app.use(Express.static("public"));
+  app.use(Express.static("files"));
   app.use(requestLogger);
   await MongoDatabase.connectToDatabase();
   await initRoutes();
