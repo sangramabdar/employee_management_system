@@ -9,6 +9,7 @@ const cors_1 = __importDefault(require("cors"));
 const init_routes_1 = __importDefault(require("./init-routes"));
 const db_1 = __importDefault(require("./db"));
 const logger_1 = require("../common/helper/logger");
+const path_1 = __importDefault(require("path"));
 const PORT = 8080;
 const app = (0, express_1.default)();
 exports.app = app;
@@ -17,7 +18,7 @@ async function initServer() {
     app.use(express_1.default.json({
         type: ["json"],
     }));
-    app.use(express_1.default.static("files"));
+    app.use(express_1.default.static(path_1.default.join(__dirname, 'files')));
     app.use(logger_1.requestLogger);
     await db_1.default.connectToDatabase();
     await (0, init_routes_1.default)();

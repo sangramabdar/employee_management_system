@@ -4,6 +4,7 @@ import initRoutes from "./init-routes";
 
 import MongoDatabase from "./db";
 import { requestLogger } from "../common/helper/logger";
+import path from "path";
 
 const PORT = 8080;
 
@@ -16,7 +17,7 @@ async function initServer() {
       type: ["json"],
     })
   );
-  app.use(Express.static("files"));
+  app.use(Express.static(path.join(__dirname, 'files'));
   app.use(requestLogger);
   await MongoDatabase.connectToDatabase();
   await initRoutes();
