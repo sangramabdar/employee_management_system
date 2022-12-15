@@ -13,7 +13,7 @@ function DeleteButton(props: any) {
       status: "success",
       description: "Deleted",
       duration: 2000,
-      position: "top-right",
+      position: "top",
     });
   };
 
