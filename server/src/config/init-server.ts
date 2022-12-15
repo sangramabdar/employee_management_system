@@ -10,25 +10,13 @@ const PORT = 5050;
 const app = Express();
 
 async function initServer() {
-  app.options(
-    "*",
-    cors({
-      origin: "*",
-    })
-  );
-
-  app.use(
-    cors({
-      origin: "*",
-    })
-  );
-
-  app.use(Express.static("public"));
+  app.use(cors({ origin: true, credentials: true }));
   app.use(
     Express.json({
       type: ["json"],
     })
   );
+  app.use(Express.static("public"));
   app.use(requestLogger);
   await MongoDatabase.connectToDatabase();
   await initRoutes();
