@@ -10,11 +10,19 @@ const PORT = 5050;
 const app = Express();
 
 async function initServer() {
+  app.options(
+    "*",
+    cors({
+      origin: "*",
+    })
+  );
+
   app.use(
     cors({
       origin: "*",
     })
   );
+
   app.use(Express.static("public"));
   app.use(
     Express.json({
