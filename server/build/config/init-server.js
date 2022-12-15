@@ -17,7 +17,7 @@ async function initServer() {
     app.use(express_1.default.json({
         type: ["json"],
     }));
-    app.use(express_1.default.static("public"));
+    // app.use(Express.static("public"));
     app.use(logger_1.requestLogger);
     await db_1.default.connectToDatabase();
     await (0, init_routes_1.default)();
