@@ -46,7 +46,7 @@ exports.EmailExists = EmailExists;
 EmailExists.message = "email already exists";
 class NotRegistered extends CustomError {
     constructor() {
-        super(NotRegistered.message, 404);
+        super(NotRegistered.message, 401);
     }
 }
 exports.NotRegistered = NotRegistered;

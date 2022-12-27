@@ -22,6 +22,7 @@ function Login() {
   const toast = useToast();
 
   const [loginInfo, setLoginInfo] = useState<LoginInfo | null>(null);
+  const [disabled, setDisabled] = useState(false);
 
   const loginToast = useRef<ToastId | null>(null);
   const errorToast = useRef<ToastId | null>(null);
@@ -47,10 +48,21 @@ function Login() {
   const loginService = async (loginInfo: LoginInfo | null) => {
     const result = await loginUser(loginInfo);
 
+    setDisabled(false);
+    setLoginInfo(null);
+
+    if (result.statusCode === 401) {
+      removeLoginToast();
+      showErrorToast(result.error!!);
+      navigation("/sign-up", {
+        replace: true,
+      });
+      return;
+    }
+
     if (result.status == Status.ERROR) {
       removeLoginToast();
       showErrorToast(result.error!!);
-      setLoginInfo(null);
       return;
     }
 
@@ -99,11 +111,10 @@ function Login() {
   };
 
   const onSubmit = (loginInfo: LoginInfo) => {
-    if (loginToast.current) return;
-
     removeErrorToast();
     showLoginToast();
     setLoginInfo(loginInfo);
+    setDisabled(true);
   };
 
   const { values, handleChange, errors, touched, handleBlur, handleSubmit } =
@@ -138,7 +149,7 @@ function Login() {
             touched={touched.password}
           />
 
-          <SubmitButton title="Login" />
+          <SubmitButton title="Login" disabled={disabled} />
         </form>
       </Stack>
     </Center>

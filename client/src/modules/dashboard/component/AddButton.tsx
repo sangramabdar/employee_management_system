@@ -108,7 +108,7 @@ function AddButton({ handleAddEmployee }: any) {
     toast.closeAll();
 
     if (result.statusCode === 403) {
-      showErrorToast("token is expired , plz log in again");
+      showErrorToast("plz log in again");
       localStorage.removeItem("token");
       navigate("/", {
         replace: true,

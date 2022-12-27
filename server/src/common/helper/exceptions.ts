@@ -46,7 +46,7 @@ class EmailExists extends CustomError {
 class NotRegistered extends CustomError {
   private static message: string = "email is not registered";
   constructor() {
-    super(NotRegistered.message, 404);
+    super(NotRegistered.message, 401);
   }
 }
 

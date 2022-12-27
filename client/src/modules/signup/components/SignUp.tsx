@@ -37,6 +37,7 @@ let initialSignUpFormData = {
 function SignUp() {
   const toast = useToast();
   const [signUpInfo, setSignUpInfo] = useState<SignUpInfo | null>(null);
+  const [disabled, setDisabled] = useState(false);
   const signUpToast = useRef<ToastId | null>(null);
   const errorToast = useRef<ToastId | null>(null);
   const successToast = useRef<ToastId | null>(null);
@@ -45,9 +46,7 @@ function SignUp() {
   useEffect(() => {
     if (!signUpInfo) return;
 
-    setTimeout(() => {
-      signUpService();
-    }, 2000);
+    signUpService();
   }, [signUpInfo]);
 
   const removeSignUpToast = () => {
@@ -65,10 +64,15 @@ function SignUp() {
   const signUpService = async () => {
     const result = await signUpUser(signUpInfo);
 
+    setDisabled(false);
+    setSignUpInfo(null);
+
     if (result.status === Status.ERROR) {
       removeSignUpToast();
       showErrorToast(result.error!!);
-      setSignUpInfo(null);
+      navigation("/login", {
+        replace: true,
+      });
       return;
     }
 
@@ -89,7 +93,7 @@ function SignUp() {
   const showSignUpToast = () => {
     signUpToast.current = toast({
       status: "loading",
-      description: "Signing up",
+      description: "Processing",
       position: "bottom",
       duration: null,
     });
@@ -104,11 +108,10 @@ function SignUp() {
   };
 
   const onSubmit = (signUpInfo: SignUpInfo) => {
-    if (signUpToast.current) return;
-
     removeErrorToast();
     showSignUpToast();
     setSignUpInfo(signUpInfo);
+    setDisabled(true);
   };
 
   const { values, handleChange, errors, touched, handleBlur, handleSubmit } =
@@ -163,7 +166,7 @@ function SignUp() {
             error={errors.confirmPassword}
             touched={touched.confirmPassword}
           />
-          <SubmitButton title="Sign Up" />
+          <SubmitButton title="Sign Up" disabled={disabled} />
         </form>
       </Stack>
     </Center>
