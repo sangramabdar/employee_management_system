@@ -23,11 +23,24 @@ function Home() {
       <Center
         display="flex"
         flexDirection="column"
+        justifyContent="center"
+        alignItems="center"
         bg="blue.400"
-        h="100vh"
         color="white"
+        position="fixed"
+        top="0"
+        bottom="0"
+        left="0"
+        right="0"
       >
-        <Text color="white" fontSize="3xl" as="b">
+        <Text
+          color="white"
+          fontSize="3xl"
+          as="b"
+          mx="auto"
+          maxW="50%"
+          textAlign="center"
+        >
           Employee Management System
         </Text>
         <Stack spacing="2">
