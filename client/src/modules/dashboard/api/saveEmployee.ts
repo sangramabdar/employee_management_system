@@ -69,7 +69,6 @@ async function updateEmployee(id: string, employee: any) {
     },
   });
 
-  console.log(result);
   return result;
 }
 

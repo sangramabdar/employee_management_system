@@ -50,7 +50,7 @@ function DeleteButton(props: any) {
   };
 
   return (
-    <Button mr="5" onClick={handleOnDelete}>
+    <Button backgroundColor="blackAlpha.200" mr="5" onClick={handleOnDelete}>
       Delete
     </Button>
   );

@@ -1,4 +1,5 @@
 import { Button, Center, Stack } from "@chakra-ui/react";
+import { Text } from "@chakra-ui/layout";
 import { Link } from "react-router-dom";
 
 function LinkButton({ children }: any) {
@@ -18,16 +19,27 @@ function LinkButton({ children }: any) {
 
 function Home() {
   return (
-    <Center bg="blue.400" h="100vh" color="white">
-      <Stack spacing="2">
-        <LinkButton>
-          <Link to="/login">Login</Link>
-        </LinkButton>
-        <LinkButton>
-          <Link to="/signup">Signup</Link>
-        </LinkButton>
-      </Stack>
-    </Center>
+    <>
+      <Center
+        display="flex"
+        flexDirection="column"
+        bg="blue.400"
+        h="100vh"
+        color="white"
+      >
+        <Text color="white" fontSize="3xl" as="b">
+          Employee Management System
+        </Text>
+        <Stack spacing="2">
+          <LinkButton>
+            <Link to="/login">Login</Link>
+          </LinkButton>
+          <LinkButton>
+            <Link to="/signup">Signup</Link>
+          </LinkButton>
+        </Stack>
+      </Center>
+    </>
   );
 }
 

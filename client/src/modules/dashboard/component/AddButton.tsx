@@ -17,23 +17,7 @@ import { saveEmployee } from "../api/saveEmployee";
 import * as yup from "yup";
 import { useToast, Box } from "@chakra-ui/react";
 import { useNavigate } from "react-router-dom";
-
-const employeeSchema = yup.object().shape({
-  name: yup.string().required("Required"),
-  age: yup
-    .number()
-    .min(18, "age must be greater than 18")
-    .max(60, "age must be less than 60")
-    .required("Required")
-    .integer("age must be integer"),
-  salary: yup.number().required("Required").integer("salary must be integer"),
-});
-
-const initialEmloyeeValues = {
-  name: "",
-  age: "",
-  salary: "",
-};
+import { employeeSchema, initialEmloyeeValues } from "../constants";
 
 function AddButton({ handleAddEmployee }: any) {
   const navigate = useNavigate();

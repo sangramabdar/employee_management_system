@@ -1,6 +1,6 @@
 import { Center, Stack, ToastId, useToast } from "@chakra-ui/react";
 import { useFormik } from "formik";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import * as yup from "yup";
 import InputField from "../../../components/InputField";
 import SubmitButton from "../../../components/SubmitButton";
@@ -51,11 +51,9 @@ function Login() {
     setDisabled(false);
     setLoginInfo(null);
 
-    console.log(result);
-
     if (result.statusCode === 401) {
       removeLoginToast();
-      showErrorToast(result.error!!);
+      showErrorToast("email is not registered");
       navigation("/signup", {
         replace: true,
       });
@@ -64,7 +62,7 @@ function Login() {
 
     if (result.status == Status.ERROR) {
       removeLoginToast();
-      showErrorToast(result.error!!);
+      showErrorToast("Invalid email or password");
       return;
     }
 
@@ -153,6 +151,7 @@ function Login() {
 
           <SubmitButton title="Login" disabled={disabled} />
         </form>
+        <Link to="/signup">Don't have an account ?</Link>
       </Stack>
     </Center>
   );

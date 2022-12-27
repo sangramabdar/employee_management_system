@@ -125,7 +125,9 @@ function UpdateButton(props: any) {
 
   return (
     <>
-      <Button onClick={onOpen}>Update</Button>
+      <Button backgroundColor="blackAlpha.200" onClick={onOpen}>
+        Update
+      </Button>
       <Modal isOpen={isOpen} onClose={handleOnClose}>
         <ModalOverlay />
         <ModalContent>

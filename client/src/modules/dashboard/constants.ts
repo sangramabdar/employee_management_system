@@ -1,6 +1,9 @@
 import * as yup from "yup";
 const employeeSchema = yup.object().shape({
-  name: yup.string().required("Required"),
+  name: yup
+    .string()
+    .min(3, "name must contain atleast 3 characters")
+    .required("Required"),
   age: yup
     .number()
     .min(18, "age must be greater than 18")

@@ -57,9 +57,20 @@ function EmployeeList({
     );
 
   return (
-    <TableContainer m="10" backgroundColor="white" borderRadius="2xl">
-      <Table variant="simple" borderRadius="2xl" size="md">
-        <TableCaption>Employee Table</TableCaption>
+    <TableContainer
+      m="10"
+      backgroundColor="blue.400"
+      borderRadius="2xl"
+      color="white"
+      maxWidth={{
+        lg: "800px",
+        sm: "600px",
+      }}
+      margin="auto"
+      my="2"
+    >
+      <Table variant="simple" size="md">
+        <TableCaption color="white">Employee Table</TableCaption>
         <Thead>
           <Tr>
             <Td>Name</Td>

@@ -5,7 +5,7 @@ import InputField from "../../../components/InputField";
 import SubmitButton from "../../../components/SubmitButton";
 import { ToastId } from "@chakra-ui/react";
 import { useRef, useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { SignUpInfo, signUpUser } from "../api/signUpUser";
 import { Status } from "../../../api/constants";
 
@@ -168,6 +168,7 @@ function SignUp() {
           />
           <SubmitButton title="Sign Up" disabled={disabled} />
         </form>
+        <Link to="/login">Already have an account ?</Link>
       </Stack>
     </Center>
   );
