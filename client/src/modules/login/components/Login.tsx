@@ -51,10 +51,12 @@ function Login() {
     setDisabled(false);
     setLoginInfo(null);
 
+    console.log(result);
+
     if (result.statusCode === 401) {
       removeLoginToast();
       showErrorToast(result.error!!);
-      navigation("/sign-up", {
+      navigation("/signup", {
         replace: true,
       });
       return;
@@ -98,7 +100,7 @@ function Login() {
       status: "loading",
       description: "logging in",
       position: "bottom",
-      duration: 10000000,
+      duration: null,
     });
   };
 
