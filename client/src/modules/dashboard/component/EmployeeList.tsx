@@ -14,7 +14,7 @@ import {
   Th,
 } from "@chakra-ui/react";
 
-import { Employee } from "../api/saveEmployee";
+import { Employee } from "../api/employee";
 import EmployeeRow from "./Employee";
 import { Stack, Center } from "@chakra-ui/react";
 

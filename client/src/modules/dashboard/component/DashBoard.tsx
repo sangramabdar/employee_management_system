@@ -2,7 +2,7 @@ import EmployeeList from "./EmployeeList";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import AddButton from "./AddButton";
-import { getEmployees } from "../api/saveEmployee";
+import { getEmployees } from "../api/employee";
 import { Status } from "../../../api/constants";
 import { Box, Button, useToast } from "@chakra-ui/react";
 

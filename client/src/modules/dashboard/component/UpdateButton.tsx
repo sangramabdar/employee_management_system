@@ -14,7 +14,7 @@ import { useFormik } from "formik";
 import { useState, useEffect } from "react";
 import { Status } from "../../../api/constants";
 import InputField from "../../../components/InputField";
-import { updateEmployee } from "../api/saveEmployee";
+import { updateEmployee } from "../api/employee";
 import { employeeSchema } from "../constants";
 import { useNavigate } from "react-router-dom";
 

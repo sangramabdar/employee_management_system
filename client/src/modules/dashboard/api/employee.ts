@@ -12,6 +12,11 @@ interface Employee {
   salary: number;
 }
 
+const DEFAULT_HEADERS = {
+  "Access-Control-Allow-Origin": "*",
+  "Content-Type": "application/json",
+};
+
 const EMPLOYEE_URL = BASE_URL + "/employees";
 
 async function saveEmployee(employee: Employee) {
@@ -19,13 +24,9 @@ async function saveEmployee(employee: Employee) {
 
   const result = await postRequest(EMPLOYEE_URL, employee, {
     Authorization: "Bearer " + accessToken,
-    ...{
-      "Access-Control-Allow-Origin": "*",
-      "Content-Type": "application/json",
-    },
+    ...DEFAULT_HEADERS,
   });
 
-  console.log(result);
   return result;
 }
 
@@ -34,13 +35,9 @@ async function getEmployees() {
 
   const result = await getRequest(EMPLOYEE_URL, {
     Authorization: "Bearer " + accessToken,
-    ...{
-      "Access-Control-Allow-Origin": "*",
-      "Content-Type": "application/json",
-    },
+    ...DEFAULT_HEADERS,
   });
 
-  console.log(result);
   return result;
 }
 
@@ -49,13 +46,9 @@ async function deleteEmployee(id: string) {
 
   const result = await deleteRequest(EMPLOYEE_URL + "/" + id, {
     Authorization: "Bearer " + accessToken,
-    ...{
-      "Access-Control-Allow-Origin": "*",
-      "Content-Type": "application/json",
-    },
+    ...DEFAULT_HEADERS,
   });
 
-  console.log(result);
   return result;
 }
 async function updateEmployee(id: string, employee: any) {
@@ -63,10 +56,7 @@ async function updateEmployee(id: string, employee: any) {
 
   const result = await putRequest(EMPLOYEE_URL + "/" + id, employee, {
     Authorization: "Bearer " + accessToken,
-    ...{
-      "Access-Control-Allow-Origin": "*",
-      "Content-Type": "application/json",
-    },
+    ...DEFAULT_HEADERS,
   });
 
   return result;

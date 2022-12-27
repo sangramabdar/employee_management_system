@@ -1,7 +1,7 @@
 import { Button, useToast } from "@chakra-ui/react";
 import { useNavigate } from "react-router-dom";
 import { Status } from "../../../api/constants";
-import { deleteEmployee } from "../api/saveEmployee";
+import { deleteEmployee } from "../api/employee";
 
 function DeleteButton(props: any) {
   const { _id, handleDeleteEmployee } = props;
