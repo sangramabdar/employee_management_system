@@ -2,27 +2,30 @@ import { Response, Request, NextFunction } from "express";
 import { CustomError } from "./exceptions";
 import ResponseBodyBuilder from "./response-body-builder";
 
-async function errorHandlingMiddleWare(
-  error: CustomError | any,
-  request: Request,
-  response: Response,
-  next: NextFunction
-) {
-  let responseBody = new ResponseBodyBuilder<string>();
+async function handleError(error: Error, req: Request, res: Response, next) {
+  const responseBody = new ResponseBodyBuilder();
 
+  responseBody.setStatusCode(500);
   responseBody.setError(error.message);
 
-  if (!error.statusCode) {
-    //to handle implicit error
-    response.status(500);
-    responseBody.setStatusCode(500);
-  } else {
-    //to handle explicit error
-    response.status(error.statusCode);
-    responseBody.setStatusCode(error.statusCode);
-  }
+  res.status(500).json(responseBody);
+}
 
-  return response.json(responseBody);
+async function handleClientError(
+  error: CustomError,
+  req: Request,
+  res: Response,
+  next
+) {
+  const responseBody = new ResponseBodyBuilder();
+
+  if (error.statusCode) {
+    responseBody.setStatusCode(error.statusCode);
+    responseBody.setError(error.message);
+    res.status(error.statusCode).json(responseBody);
+    return;
+  }
+  next(error);
 }
 
 function invalidPathHandler(
@@ -35,4 +38,4 @@ function invalidPathHandler(
   });
 }
 
-export { errorHandlingMiddleWare, invalidPathHandler };
+export { handleClientError, handleError, invalidPathHandler };

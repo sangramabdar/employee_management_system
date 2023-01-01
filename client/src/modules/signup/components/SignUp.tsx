@@ -8,6 +8,7 @@ import { useRef, useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { SignUpInfo, signUpUser } from "../api/signUpUser";
 import { Status } from "../../../api/constants";
+import { Text } from "@chakra-ui/layout";
 
 let signUpFormSchema = yup.object().shape({
   name: yup
@@ -122,8 +123,16 @@ function SignUp() {
     });
 
   return (
-    <Center bg="blue.400" h="100vh" color="white">
-      <Stack justifyContent="center" alignItems="center">
+    <Center bg="blue.300" h="100vh" color="white">
+      <Stack
+        justifyContent="center"
+        alignItems="center"
+        boxShadow="lg"
+        rounded="md"
+        padding="5"
+        bg="blue.300"
+      >
+        <Text fontSize="20px">Sign Up</Text>
         <form onSubmit={handleSubmit}>
           <InputField
             label="Name"

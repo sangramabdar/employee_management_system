@@ -86,7 +86,7 @@ function DashBoard() {
   };
 
   return (
-    <Box h="full">
+    <Box>
       <Button
         variant="solid"
         onClick={handleLogOut}

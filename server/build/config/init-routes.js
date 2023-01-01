@@ -19,6 +19,7 @@ async function initRoutes() {
     });
     //global error handling middleware
     init_server_1.app.use(logger_1.errorLogger);
-    init_server_1.app.use(error_middleware_1.errorHandlingMiddleWare);
+    init_server_1.app.use(error_middleware_1.handleClientError);
+    init_server_1.app.use(error_middleware_1.handleError);
 }
 exports.default = initRoutes;

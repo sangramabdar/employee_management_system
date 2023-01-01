@@ -1,4 +1,4 @@
-import { BASE_URL } from "../../../api/constants";
+import { BASE_URL, DEFAULT_HEADERS } from "../../../api/constants";
 import {
   postRequest,
   getRequest,
@@ -11,11 +11,6 @@ interface Employee {
   age: number;
   salary: number;
 }
-
-const DEFAULT_HEADERS = {
-  "Access-Control-Allow-Origin": "*",
-  "Content-Type": "application/json",
-};
 
 const EMPLOYEE_URL = BASE_URL + "/employees";
 
@@ -51,6 +46,7 @@ async function deleteEmployee(id: string) {
 
   return result;
 }
+
 async function updateEmployee(id: string, employee: any) {
   const accessToken = localStorage.getItem("token");
 

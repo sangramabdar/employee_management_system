@@ -59,7 +59,7 @@ function EmployeeList({
   return (
     <TableContainer
       m="10"
-      backgroundColor="blue.400"
+      bg="blue.300"
       borderRadius="2xl"
       color="white"
       maxWidth={{
@@ -68,6 +68,7 @@ function EmployeeList({
       }}
       margin="auto"
       my="2"
+      rounded="md"
     >
       <Table variant="simple" size="md">
         <TableCaption color="white">Employee Table</TableCaption>

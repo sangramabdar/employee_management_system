@@ -125,7 +125,13 @@ function UpdateButton(props: any) {
 
   return (
     <>
-      <Button backgroundColor="blackAlpha.200" onClick={onOpen}>
+      <Button
+        _hover={{
+          backgroundColor: "blue.500",
+        }}
+        bgColor="blue.400"
+        onClick={onOpen}
+      >
         Update
       </Button>
       <Modal isOpen={isOpen} onClose={handleOnClose}>

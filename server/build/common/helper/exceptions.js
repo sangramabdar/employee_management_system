@@ -4,6 +4,7 @@ exports.BadRequest = exports.CustomError = exports.Unauthorized = exports.NotReg
 class CustomError extends Error {
     constructor(message, statusCode) {
         super(message);
+        this.statusCode = null;
         this.statusCode = statusCode;
     }
     setMessage(message) {
@@ -39,7 +40,7 @@ class WrongContent extends CustomError {
 exports.WrongContent = WrongContent;
 class EmailExists extends CustomError {
     constructor() {
-        super(EmailExists.message, 404);
+        super(EmailExists.message, 401);
     }
 }
 exports.EmailExists = EmailExists;

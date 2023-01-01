@@ -10,7 +10,14 @@ interface Result {
   statusCode?: number;
 }
 
+const DEFAULT_HEADERS = {
+  "Access-Control-Allow-Origin": "*",
+  "Content-Type": "application/json",
+};
+
 const BASE_URL = "https://employee-management-system-two.vercel.app/api";
 
-export { Status, BASE_URL };
+// const BASE_URL = "http://localhost:8080/api";
+
+export { Status, BASE_URL, DEFAULT_HEADERS };
 export type { Result };

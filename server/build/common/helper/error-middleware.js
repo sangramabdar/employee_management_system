@@ -3,24 +3,26 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.invalidPathHandler = exports.errorHandlingMiddleWare = void 0;
+exports.invalidPathHandler = exports.handleError = exports.handleClientError = void 0;
 const response_body_builder_1 = __importDefault(require("./response-body-builder"));
-async function errorHandlingMiddleWare(error, request, response, next) {
-    let responseBody = new response_body_builder_1.default();
+async function handleError(error, req, res, next) {
+    const responseBody = new response_body_builder_1.default();
+    responseBody.setStatusCode(500);
     responseBody.setError(error.message);
-    if (!error.statusCode) {
-        //to handle implicit error
-        response.status(500);
-        responseBody.setStatusCode(500);
-    }
-    else {
-        //to handle explicit error
-        response.status(error.statusCode);
-        responseBody.setStatusCode(error.statusCode);
-    }
-    return response.json(responseBody);
+    res.status(500).json(responseBody);
 }
-exports.errorHandlingMiddleWare = errorHandlingMiddleWare;
+exports.handleError = handleError;
+async function handleClientError(error, req, res, next) {
+    const responseBody = new response_body_builder_1.default();
+    if (error.statusCode) {
+        responseBody.setStatusCode(error.statusCode);
+        responseBody.setError(error.message);
+        res.status(error.statusCode).json(responseBody);
+        return;
+    }
+    next(error);
+}
+exports.handleClientError = handleClientError;
 function invalidPathHandler(request, response, next) {
     response.status(404).json({
         error: "invalid path",

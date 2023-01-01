@@ -7,6 +7,7 @@ import SubmitButton from "../../../components/SubmitButton";
 import { useEffect, useRef, useState } from "react";
 import { LoginInfo, loginUser } from "../api/loginUser";
 import { Status } from "../../../api/constants";
+import { Text } from "@chakra-ui/layout";
 
 let loginFormData = yup.object().shape({
   email: yup.string().required("Required").email(),
@@ -125,8 +126,16 @@ function Login() {
     });
 
   return (
-    <Center bg="blue.400" h="100vh" color="white">
-      <Stack justifyContent="center" alignItems="center">
+    <Center bg="blue.300" h="100vh" color="white">
+      <Stack
+        justifyContent="center"
+        alignItems="center"
+        boxShadow="lg"
+        rounded="md"
+        padding="5"
+        bg="blue.300"
+      >
+        <Text fontSize="20px">Login</Text>
         <form onSubmit={handleSubmit}>
           <InputField
             label="Email"

@@ -7,10 +7,13 @@ function LinkButton({ children }: any) {
     <Button
       mt="20px"
       variant="solid"
-      backgroundColor="blackAlpha.200"
+      backgroundColor="blue.400"
       width="100px"
       textAlign="center"
       size="lg"
+      _hover={{
+        backgroundColor: "blue.500",
+      }}
     >
       {children}
     </Button>
@@ -25,7 +28,7 @@ function Home() {
         flexDirection="column"
         justifyContent="center"
         alignItems="center"
-        bg="blue.400"
+        bg="blue.300"
         color="white"
         position="fixed"
         top="0"

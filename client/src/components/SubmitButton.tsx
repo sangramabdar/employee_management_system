@@ -11,9 +11,12 @@ function SubmitButton({ title, disabled }: SubmitButtonProps) {
       <Button
         mt="20px"
         variant="solid"
-        backgroundColor="blackAlpha.200"
         type="submit"
+        bgColor="blue.400"
         disabled={disabled}
+        _hover={{
+          backgroundColor: "blue.500",
+        }}
       >
         {title}
       </Button>

@@ -1,6 +1,7 @@
 import { app } from "./init-server";
 import {
-  errorHandlingMiddleWare,
+  handleClientError,
+  handleError,
   invalidPathHandler,
 } from "../common/helper/error-middleware";
 import RootRouter from "../modules/root/root.router";
@@ -19,7 +20,8 @@ async function initRoutes() {
 
   //global error handling middleware
   app.use(errorLogger);
-  app.use(errorHandlingMiddleWare);
+  app.use(handleClientError);
+  app.use(handleError);
 }
 
 export default initRoutes;

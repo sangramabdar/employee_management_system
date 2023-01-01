@@ -1,5 +1,5 @@
 class CustomError extends Error {
-  statusCode: number;
+  statusCode: number | null = null;
   constructor(message: string, statusCode: number) {
     super(message);
     this.statusCode = statusCode;
@@ -39,7 +39,7 @@ class WrongContent extends CustomError {
 class EmailExists extends CustomError {
   private static message: string = "email already exists";
   constructor() {
-    super(EmailExists.message, 404);
+    super(EmailExists.message, 401);
   }
 }
 
