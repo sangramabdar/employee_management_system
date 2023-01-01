@@ -97,7 +97,7 @@ function Login() {
   const showLoginToast = () => {
     loginToast.current = toast({
       status: "loading",
-      description: "logging in",
+      description: "Processing",
       position: "bottom",
       duration: null,
     });
@@ -126,7 +126,7 @@ function Login() {
     });
 
   return (
-    <Center bg="blue.300" h="100vh" color="white">
+    <Center bg="blue.400" h="100vh" color="white">
       <Stack
         justifyContent="center"
         alignItems="center"

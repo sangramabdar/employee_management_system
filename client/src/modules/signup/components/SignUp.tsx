@@ -123,7 +123,7 @@ function SignUp() {
     });
 
   return (
-    <Center bg="blue.300" h="100vh" color="white">
+    <Center bg="blue.400" h="100vh" color="white">
       <Stack
         justifyContent="center"
         alignItems="center"
